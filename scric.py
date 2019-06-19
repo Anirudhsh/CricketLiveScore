@@ -12,13 +12,15 @@ r = requests.get(URL)
 soup = BeautifulSoup(r.content, 'html5lib') 
 
 quotes=[] # a list to store quotes 
-
+scoresent=""
 #table = soup.find('div', attrs = {'id':'page-wrapper'}).find('div', attrs = {'class':'cb-bg-white cb-col-100 cb-col'}).find('div', attrs = {'class':'cb-col-67 cb-col cb-left cb-schdl'}).find('div', attrs = {'class':'cb-col cb-col-100 cb-lv-main'}) 
-currtable = soup.find('div', attrs = {'class':'cb-lv-scrs-col text-black'})
-targtable = soup.find('div', attrs = {'class':'cb-lv-scrs-col cb-text-live'})
-score=currtable.text+"\n"+targtable.text
-#score="TonyMkl"
-message = client.messages.create(from_='whatsapp:+14155238886',body=score,to='whatsapp:+919588250337') 
+while True:
+ currtable = soup.find('div', attrs = {'class':'cb-lv-scrs-col text-black'})
+ targtable = soup.find('div', attrs = {'class':'cb-lv-scrs-col cb-text-live'})
+ score=currtable.text+"\n"+targtable.text
+  if scoresent!=score:
+   message = client.messages.create(from_='whatsapp:+14155238886',body=score,to='whatsapp:+919588250337')
+   scoresent=score
  
 print(message.sid)    
 #   .find('div', attrs = {'class':'cb-col-100 cb-col cb-schdl'}).find('div', attrs = {'class':'cb-col'})
